@@ -1,0 +1,53 @@
+IDEA: Personal Website
+
+4 HTML Pages
+1. Index - landing page
+HEADER:
+-> Name;
+-> Simple Navigation Bar: Home - Contact Me - Experience - Personal Projects - Education
+MAIN:
+-> Hello! I'm Clarence.
+-> Picture
+-> Short Biography
+LINKS
+-> Link to Education
+-> Link to Experience
+-> Link to Personal Projects
+FOOTER:
+-> Made by Clarence Monterozo
+-> Contact Details
+-> Links to the Different Parts of the Site
+
+2. Contact Me
+-> Two Columns, Two Rows
+ROW 1:
+-> Merged = CONTACT ME
+ROW 2:
+-> Col 1: Email, Contact Number, LinkedIn
+-> Col 2: Name + Field; Message + Field; Send Button
+
+3. Experience
+-> Tabular Data
+
+4. Personal Projects
+-> PERSONAL PROJECTS
+-> Image + Link to Kaggle Notebook
+-> More projects to come!
+
+5. Education and Learnings
+-> Tabular Data
+
+TOTAL minimum 10 distinct HTML tags
+1. p; 2-5. table, tr, td, th; 6. input; 7. Button; 8. a; 9. img / picture; 10. h1-h6; 11. div, span; 11. ol/ul; 12. header/footer/main
+
+Bootstrap Integration
+- NavBar
+- Form
+
+TOTAL minimum of 5 different CSS selectors
+TOTAL minimum of 5 different CSS properties
+
+Javascript integration
+- Contact Me form
+
+Site should work on mobile devices, laptops, desktops
