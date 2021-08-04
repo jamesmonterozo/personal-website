@@ -8,18 +8,23 @@
         <link href="styles.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>Contact Clarence</title>
-
+        
+        
         <script>
 
-            // TODO: Add code to check answers to questions
+            $
             document.addEventListener('DOMContentLoaded', function() {
-                let bttnC = document.querySelector('#contactSubmit');
-                document.getElementById('contactSubmit').onclick = function() {
+                document.getElementById("cForm").addEventListener('submit', function(event){event.preventDefault();});
+
+                document.getElementById('cForm').onsubmit = function() {
                     let response = document.getElementById('cFormSubmitted');
-                    let table = document.getElementById('cFormTable');
+                    let table = document.getElementById('cFormNotSubmitted');
                     let errorMessage = document.getElementById('cFormInvalid');
 
-                    let inputs = document.querySelectorAll("input")
+                    let inputs = [document.getElementById('contactFormName'), document.getElementById('contactFormEmail'), document.getElementById('contactFormMessage')];
+                    let bttn = document.getElementById('contactSubmit');
+                    let emailHelp = document.getElementById('emailHelp');
+                    let submitHelp = document.getElementById('submitHelp');
                     let valid = true;
 
                     for(let i = 0; i < inputs.length; i++)
@@ -30,21 +35,43 @@
                             break;
                         }
                     }
-
+                    
                     if (valid)
                     {
-                        response.style.display = "flex";
+                        for(let i = 0; i < inputs.length; i++)
+                        {
+                            inputs[i].classList.add("form-control-plaintext");
+                            inputs[i].readOnly = true;
+                        }
+                        bttn.style.display = "none";
+                        emailHelp.style.display = "none";
+                        submitHelp.style.display = "none";
+                        response.style.display = "block";
                         table.style.display = "none";
+                        let data = {
+                                "entry.376464666" : inputs[1].value,
+                                "entry.1899540165" : inputs[0].value,
+                                "entry.1781214645" : inputs[2].value
+                            };
+                        let url = "https://docs.google.com/forms/d/e/1FAIpQLSejKM2osy9JkbstQTZ0gjr2XfMK55uzmS06IL1hHrzc0i0-Eg/formResponse?";
+                        let dataT = "entry.376464666=" + inputs[1].value + "&" + "entry.1899540165=" + inputs[0].value + "&" + "entry.1781214645=" + inputs[2].value;
+                        let request = new XMLHttpRequest();
+                        request.open("POST", url, true);
+                        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        request.send(dataT);                      
+                        
                     }
                     else
                     {
                         errorMessage.innerHTML = "Please fill up all the information being asked before submitting.";
                     }
+                    
 
                 };
             });
 
         </script>
+    
 
     </head>
     <body>
@@ -94,60 +121,49 @@
 
                 </div>
 
-                <div id="contactForm" class="form-group">
-                    <table id="cFormSubmitted" style="display: none;">
-                        <tr>
-                            <td>
-                                <h3>Contact Form</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Your message was sent to Clarence!</h5>
-                                <p>Kindly wait for an email regarding your message within the next five (5) business days. Thank you!</p>
-                            </td>
-                        </tr>
-                    </table>
+                <div id="contactForm">
+                    
+                    <!---->
                     <table id="cFormTable">
                         <tr>
                             <td>
                                 <h3>Contact Form</h3>
+                                <div id="cFormNotSubmitted">
+                                    <p>You may also fill up and submit the following form to send Clarence a message.</p>
+                                </div>
+                                <div id="cFormSubmitted" style="display: none">
+                                    <h5 style="color: green">Your message was sent to Clarence!</h5>
+                                    <p>Kindly wait for an email regarding your message. Thank you!</p>    
+                                </div>
                             </td>
                         </tr>
-
                         <tr>
                             <td>
-                                <p>You may also fill up and submit the following form to send Clarence a message.</p>
+                                <form id="cForm" class="is-invalid is-valid">
+                                    <div class="form-group">
+                                        <label for="contactFormName">Full Name</label>
+                                        <input type="text" class="form-control" id="contactFormName" placeholder="First Name Last Name" required>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactFormEmail">Email Address</label>
+                                        <input type="email" class="form-control" id="contactFormEmail" aria-describedby="emailHelp" placeholder="example@example.com" required title="Please provide a valid e-mail address">
+                                        <small id="emailHelp" class="form-text text-muted">Please make sure to enter a <b>VALID email address</b>. We'll never share your email with anyone else.</small>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactFormMessage">Message to Clarence</label>
+                                        <textarea class="form-control" id="contactFormMessage" rows="3" placeholder="Type your message here..." required></textarea>
+                                        <p id="cFormInvalid" style="color: red;"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <small id="submitHelp" class="form-text text-muted" style="font-weight: bold;">Please double check all the information provided before submitting the form.</small>
+                                        <br>
+                                        <button id="contactSubmit" type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
                             </td>
-                        </tr>
-                            <td>
-                                <label for="contactFormName">Full Name</label>
-                                <input type="text" class="form-control" id="contactFormName" placeholder="First Name Last Name">
-                                <br>
-                            </td>
-                        <tr>
-                            <td>
-                                <label for="contactFormEmail">Email Address</label>
-                                <input type="email" class="form-control" id="contactFormEmail" aria-describedby="emailHelp" placeholder="example@example.com">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                <br>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <label for="contactFormMessage">Message to Clarence</label>
-                                <textarea class="form-control" id="contactFormMessage" rows="3" placeholder="Type your message here..."></textarea>
-                                <p id="cFormInvalid" style="color: red;"></p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <button id="contactSubmit" type="submit" class="btn btn-primary">Submit</button>
-                            </td>
-                        </tr>
-
+                        </tr>                    
                     </table>
                 </div>
             </div>
